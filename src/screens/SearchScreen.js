@@ -1,7 +1,8 @@
 import { View, Text, StyleSheet } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import SearchBar from "../components/SearchBar";
 import useResults from "../hooks/useResults";
+import ResultsList from "../components/ResultsList";
 
 export default function SearchScreen() {
   const [term, setTerm] = useState("");
@@ -12,20 +13,40 @@ export default function SearchScreen() {
 
   const [searchApi, results, errorMessage] = useResults();
 
+  const filterResultsByPrice = (price) => {
+    return results.filter((result) => {
+      return result.price === price;
+    });
+  };
+
   return (
-    <View style={styles.ViewStyle}>
+    <View>
       <SearchBar
         term={term}
         onTermChange={(newTerm) => setTerm(newTerm)}
         onTermSubmit={onTermSubmit}
       />
-      {errorMessage.length > 1 ? (
-        <Text style={styles.errorStyle}>{errorMessage}</Text>
-      ) : (
-        <Text style={styles.textStyle}>
-          We have successfully found {results.length} results!
-        </Text>
-      )}
+      <View style={styles.ViewStyle}>
+        {errorMessage.length > 1 ? (
+          <Text style={styles.errorStyle}>{errorMessage}</Text>
+        ) : (
+          <Text style={styles.textStyle}>
+            We have successfully found {results.length} results!
+          </Text>
+        )}
+      </View>
+      <ResultsList
+        header='Cost Effective'
+        results={filterResultsByPrice("$")}
+      />
+      <ResultsList
+        header='Bit Pricier..'
+        results={filterResultsByPrice("$$")}
+      />
+      <ResultsList
+        header='Big Spender!'
+        results={filterResultsByPrice("$$$")}
+      />
     </View>
   );
 }
