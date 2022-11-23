@@ -1,42 +1,47 @@
 import { View, Text, StyleSheet } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SearchBar from "../components/SearchBar";
-import yelp from "../api/yelp";
+import useResults from "../hooks/useResults";
 
 export default function SearchScreen() {
   const [term, setTerm] = useState("");
-  const [results, setResults] = useState([]);
 
   const onTermSubmit = () => {
     searchApi(term);
   };
 
-  const searchApi = async () => {
-    try {
-      const response = await yelp.get("/search", {
-        params: {
-          limit: 50,
-          term,
-          location: "san jose",
-        },
-      });
-      console.log(response.data.businesses);
-      setResults(response.data.businesses);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const [searchApi, results, errorMessage] = useResults();
 
   return (
-    <View>
+    <View style={styles.ViewStyle}>
       <SearchBar
         term={term}
         onTermChange={(newTerm) => setTerm(newTerm)}
         onTermSubmit={onTermSubmit}
       />
-      <Text>We have successfully found {results.length} results!</Text>
+      {errorMessage.length > 1 ? (
+        <Text style={styles.errorStyle}>{errorMessage}</Text>
+      ) : (
+        <Text style={styles.textStyle}>
+          We have successfully found {results.length} results!
+        </Text>
+      )}
     </View>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  errorStyle: {
+    color: "red",
+    fontSize: 20,
+  },
+  textStyle: {
+    fontSize: 16,
+    marginVertical: 10,
+    color: "green",
+  },
+  ViewStyle: {
+    display: "flex",
+    alignItems: "center",
+  },
+});
