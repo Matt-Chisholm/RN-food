@@ -8,6 +8,7 @@ export default function ResultsList({ header, results }) {
       <Text style={styles.headerStyle}>{header}</Text>
       <FlatList
         horizontal
+        showsHorizontalScrollIndicator={false}
         data={results}
         keyExtractor={(result) => result.id}
         renderItem={({ item }) => {
