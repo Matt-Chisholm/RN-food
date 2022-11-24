@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import React, { useState } from "react";
 import SearchBar from "../components/SearchBar";
 import useResults from "../hooks/useResults";
@@ -35,18 +35,20 @@ export default function SearchScreen() {
           </Text>
         )}
       </View>
-      <ResultsList
-        header='Cost Effective'
-        results={filterResultsByPrice("$")}
-      />
-      <ResultsList
-        header='Bit Pricier..'
-        results={filterResultsByPrice("$$")}
-      />
-      <ResultsList
-        header='Big Spender!'
-        results={filterResultsByPrice("$$$")}
-      />
+      <ScrollView>
+        <ResultsList
+          header='Cost Effective'
+          results={filterResultsByPrice("$")}
+        />
+        <ResultsList
+          header='Bit Pricier..'
+          results={filterResultsByPrice("$$")}
+        />
+        <ResultsList
+          header='Big Spender!'
+          results={filterResultsByPrice("$$$")}
+        />
+      </ScrollView>
     </View>
   );
 }
