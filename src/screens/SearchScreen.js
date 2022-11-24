@@ -20,7 +20,7 @@ export default function SearchScreen() {
   };
 
   return (
-    <View>
+    <View style={styles.backgroundStyle}>
       <SearchBar
         term={term}
         onTermChange={(newTerm) => setTerm(newTerm)}
@@ -64,5 +64,8 @@ const styles = StyleSheet.create({
   ViewStyle: {
     display: "flex",
     alignItems: "center",
+  },
+  backgroundStyle: {
+    backgroundColor: "lightblue",
   },
 });
