@@ -7,8 +7,9 @@ import {
 } from "react-native";
 import React from "react";
 import ResultsDetail from "./ResultsDetail";
+import { withNavigation } from "react-navigation";
 
-export default function ResultsList({ header, results, navigation }) {
+const ResultsList = ({ header, results, navigation }) => {
   return (
     <View>
       <Text style={styles.headerStyle}>{header}</Text>
@@ -28,7 +29,7 @@ export default function ResultsList({ header, results, navigation }) {
       />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   headerStyle: {
@@ -43,3 +44,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
+
+export default withNavigation(ResultsList);
