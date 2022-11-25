@@ -30,9 +30,7 @@ export default function SearchScreen() {
         {errorMessage.length > 1 ? (
           <Text style={styles.errorStyle}>{errorMessage}</Text>
         ) : (
-          <Text style={styles.textStyle}>
-            We have successfully found {results.length} results!
-          </Text>
+          <View></View>
         )}
       </View>
       <ScrollView>
