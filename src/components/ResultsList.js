@@ -1,4 +1,10 @@
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 import React from "react";
 import ResultsDetail from "./ResultsDetail";
 
@@ -12,7 +18,12 @@ export default function ResultsList({ header, results, navigation }) {
         data={results}
         keyExtractor={(result) => result.id}
         renderItem={({ item }) => {
-          return <ResultsDetail result={item} />;
+          return (
+            <TouchableOpacity
+              onPress={() => navigation.navigate("ResultsShow")}>
+              <ResultsDetail result={item} />
+            </TouchableOpacity>
+          );
         }}
       />
     </View>
