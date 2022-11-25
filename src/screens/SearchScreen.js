@@ -4,7 +4,7 @@ import SearchBar from "../components/SearchBar";
 import useResults from "../hooks/useResults";
 import ResultsList from "../components/ResultsList";
 
-export default function SearchScreen() {
+export default function SearchScreen({ navigation }) {
   const [term, setTerm] = useState("");
 
   const onTermSubmit = () => {
@@ -37,14 +37,17 @@ export default function SearchScreen() {
         <ResultsList
           header='Cost Effective'
           results={filterResultsByPrice("$")}
+          navigation={navigation}
         />
         <ResultsList
           header='Bit Pricier..'
           results={filterResultsByPrice("$$")}
+          navigation={navigation}
         />
         <ResultsList
           header='Big Spender!'
           results={filterResultsByPrice("$$$")}
+          navigation={navigation}
         />
       </ScrollView>
     </View>

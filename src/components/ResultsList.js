@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, FlatList } from "react-native";
 import React from "react";
 import ResultsDetail from "./ResultsDetail";
 
-export default function ResultsList({ header, results }) {
+export default function ResultsList({ header, results, navigation }) {
   return (
     <View>
       <Text style={styles.headerStyle}>{header}</Text>
