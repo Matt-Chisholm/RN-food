@@ -69,5 +69,6 @@ const styles = StyleSheet.create({
   },
   backgroundStyle: {
     backgroundColor: "lightblue",
+    flex: 1,
   },
 });
